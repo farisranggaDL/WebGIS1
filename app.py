@@ -4,7 +4,7 @@ import folium
 import pandas as pd
 
 app = Flask(__name__)
-df = pd.read_csv("04._Data_Pelatihan/demo_flask/static/data_populasi.csv")
+df = pd.read_csv("static/data_populasi.csv")
 names = df['nama'].dropna().unique().tolist()
 print (df)
 
@@ -39,4 +39,5 @@ def hello_world():
     return render_template('home.html', map_html=map_html, names=names)
 
 if __name__ == '__main__':
+
     app.run(debug=True)
