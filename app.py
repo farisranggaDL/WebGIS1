@@ -4,20 +4,25 @@ import folium
 import pandas as pd
 
 app = Flask(__name__)
-df = pd.read_csv("static/data_populasi.csv")
+df = pd.read_csv("04._Data_Pelatihan/demo_flask/static/data_populasi.csv")
+names = df['nama'].dropna().unique().tolist()
 print (df)
 
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
     min_pop = 0
     keyword = ""
+    name =""
     if request.method == 'POST':
-        min_pop = int(request.form.get('min_pop'))
+        min_pop = request.form.get('min_pop') or 0
+        min_pop = int(min_pop)
         keyword = request.form.get("keyword")
+        name = request.form.get('name')
       
     filtered = df[
         (df["populasi"] >= min_pop) &
-        (df["nama"].str.contains(keyword, case=False, na=False))
+        (df["nama"].str.contains(keyword, case=False, na=False))&
+        (df["nama"].str.contains(name, case=False, na=False))
     ]
 
     m = folium.Map(location=[-6.5, 107.0], zoom_start=8)
@@ -31,8 +36,7 @@ def hello_world():
 
     # Save map to HTML string
     map_html = m._repr_html_()
-    return render_template('home.html', map_html=map_html)
+    return render_template('home.html', map_html=map_html, names=names)
 
 if __name__ == '__main__':
-
     app.run(debug=True)

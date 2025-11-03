@@ -8,17 +8,26 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="mb-4">Peta Populasi Wilayah</h1>
+    <h1 class="mb-3">Peta Populasi Wilayah</h1>
     <form action="/" method="POST" class="row g-3 mb-4">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <label for="min_pop" class="form-label">Minimal Populasi</label>
             <input type="number" id="min_pop" name="min_pop" class="form-control" value="{{ min_pop }}">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <label for="keyword" class="form-label">Nama mengandung</label>
             <input type="text" id="keyword" name="keyword" class="form-control" value="{{ keyword }}">
         </div>
-        <div class="col-md-4 d-flex align-items-end">
+        <div class="col-md-3">
+            <label for="name" class="form-label">Lokasi</label>
+            <select name="name" class="form-select">
+            <option value="">-- Pilih Kota --</option>
+            {% for name in names %}
+             <option value="{{ name }}">{{ name }}</option> 
+            {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
             <button type="submit" class="btn btn-primary w-100">Filter</button>
         </div>
     </form>
