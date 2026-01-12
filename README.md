@@ -1,2 +1,2 @@
 # WebGIS1
-Project webgis pertama
+Dasar-dasar Pembuatan WebGIS dengan Pemrograman Python
